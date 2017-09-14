@@ -10,6 +10,7 @@ const app            = express();
 const FbStrategy = require('passport-facebook').Strategy;
 const passport = require('passport');
 const MongoStore = require("connect-mongo")(session);
+const flash = require('connect-flash');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -28,6 +29,8 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "layouts/main-layout");
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(flash());
 
 // Access POST params with body parser
 app.use(bodyParser.json());
